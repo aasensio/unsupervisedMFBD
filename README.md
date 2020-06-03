@@ -1,5 +1,9 @@
-# unsupervisedMFBD
-Learning to do multiframe blind deconvolution
+# Learning to do multiframe blind deconvolution unsupervisedly
+
+[![github](https://img.shields.io/badge/GitHub-aasensio%2Fsicon-blue.svg?style=flat)](https://github.com/aasensio/unsupervisedMFBD)
+[![license](http://img.shields.io/badge/license-MIT-blue.svg?style=flat)](https://github.com/aasensio/unsupervisedMFBD/blob/master/LICENSE)
+[![ADS](https://img.shields.io/badge/ADS-arXiv200601438A-red.svg)](https://ui.adsabs.harvard.edu/abs/2020arXiv200601438A/abstract)
+[![arxiv](https://img.shields.io/badge/arxiv-2006.01438-orange.svg?style=flat)](https://arxiv.org/abs/2006.01438)
 
 Observation from ground based telescopes are affected by the presence of the 
 Earth atmosphere, which severely perturbs them. The use of adaptive optics techniques
@@ -21,3 +25,38 @@ self-supervisedly, i.e., using only observations. The output of the network are 
 and also estimations of the instantaneous wavefronts. The network model is of the order of 1000
 times faster than applying standard deconvolution based on optimization. With some work, the model
 can bed used on real-time at the telescope.
+
+## Training
+
+This repository contains all the infrastructure needed to retrain the neural approach. However,
+you will need to build a training set and do the needed modifications in the `train.py` file to
+use your training set. You only need to provide bursts of images for the training since
+no supervision is required. You will also need to adapt the sizes of the telescope primary
+and secondary mirror, observing wavelength and pixel size in arcsec for the training to
+proceed correctly.
+
+We have tested with PyTorch 1.5 but it should work in all versions above 1.0.
+
+### Dependencies
+    numpy
+    h5py
+    torch
+    tqdm
+    argparse
+    scipy
+
+## Validation
+
+This repository contains an example of an observation of sigOri with 200 frames and
+the network trained for observations with the Nordic Optical Telescope (NOT) at 800 nm. The 
+file `validation.py` shows how to apply the neural deconvolution to this example.
+
+### Dependencies
+
+    numpy
+    matplotlib
+    astropy
+    torch
+    tqdm
+    skimage
+    scipy

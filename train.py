@@ -277,13 +277,7 @@ class Deconvolution(object):
 
             
             # Evaluate the model
-            coeff, numerator, denominator, psf, psf_ft, loss = self.model(images, images_ft, variance)
-
-            # Add some L1 regularization if needed for the modes (it can push them to zero if no
-            # information is available but still needs to be tested)
-            loss_l1 = 1e-4 * torch.mean(torch.abs(coeff))
-
-            # loss = loss + loss_l1
+            coeff, numerator, denominator, psf, psf_ft, loss = self.model(images, images_ft, variance)            
                     
             # Backpropagate
             loss.backward()
